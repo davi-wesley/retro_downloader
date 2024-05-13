@@ -1,27 +1,5 @@
-class_name: RelatorioAnaliticoEmitido
+class_name: ConsoleModel
 json_data: '{
-  "considerarVolumeFaturadoZero": true,
-  "descrTipoCategoria": "string",
-  "enquadramentoFaixaVolFaturado": true,
-  "faixas": [
-    {
-      "ate": 0,
-      "de": 0,
-      "id": 0
-    }
-  ],
-  "grupo": "string",
-  "id": 0,
-  "idCidade": 0,
-  "idGrupo": 0,
-  "idProduto": 0,
-  "opcao": 0,
-  "perFinal": "string",
-  "perInicial": "string",
-  "periodo": 0,
-  "periodos": "string",
-  "produto": "string",
-  "seqPerFinal": 0,
-  "seqPerInicial": 0,
-  "tipoCategoria": 0
-}'
+        "path": "xpath=//*[@id=\"subMenu\"]/a[1]",
+        "name": "Atari 2600"
+    }'
