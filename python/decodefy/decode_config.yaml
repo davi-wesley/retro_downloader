@@ -1,5 +1,8 @@
-class_name: ConsoleModel
+class_name: Game
 json_data: '{
-        "path": "xpath=//*[@id=\"subMenu\"]/a[1]",
-        "name": "Atari 2600"
+        "path": "xpath=//*[@id=\"main\"]/div[2]/div/main/table/tbody/tr[5]/td[2]/a",
+        "title": "Mega Man X",
+        "system": "SNES",
+        "region": "",
+        "Version": "1.0"
     }'

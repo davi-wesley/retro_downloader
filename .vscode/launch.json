@@ -16,6 +16,13 @@
             "flutterMode": "profile"
         },
         {
+            "name": "retroDownloader (debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "flutterMode": "debug"
+        },
+        {
             "name": "retroDownloader (release mode)",
             "request": "launch",
             "type": "dart",

@@ -1,12 +1,12 @@
 import 'package:field_suggestion/box_controller.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:retroDownloader/app/core/components/enums/text_controller_type.dart';
 import 'package:retroDownloader/app/core/models/console_model.dart';
 import 'package:retroDownloader/app/core/models/suggestion.dart';
+import 'package:retroDownloader/app/shared/components/enums/text_controller_type.dart';
 
 class TextController<T> {
   UniqueKey autoCompleteKey = UniqueKey();
-  late dynamic controller;
+  late TextEditingController controller;
   String get value => controller.value.text;
   bool get isSelected => object != null;
   void dispose() => controller.dispose();
@@ -23,44 +23,36 @@ class TextController<T> {
   final GlobalKey key = GlobalKey();
 
   void clear() {
-    // if (type == TextControllerType.currency) {
-    //   controller.text = translate.zeroDinheiro;
-    // } else {
-    //   controller.text = '';
-    // }
     controller.text = '';
     lastObject = object;
     object = null;
     boxController.close?.call();
   }
 
-  void setValue(text) {
+  void setValue(String text) {
     try {
-      // if (type == TextControllerType.currency) {
-      //   text = toMoney(text != null ? double.parse(text.toString()) : 0);
-      // }
-      controller.text = text.toString();
+      controller.text = text;
       boxController.close?.call();
-    } catch (_) {}
+    } catch (e) {}
   }
 
-  void setObject([int? id, String? descr, String? flag]) {
+  void setObject([String path = '', String name = '']) {
     try {
-      controller.text = descr ?? '';
-      //object = DefaultModel(id: id ?? 0, descr: descr ?? '', flag: flag ?? '') as T;
+      controller.text = name;
+      object = ConsoleModel(path, name) as T;
       boxController.refresh?.call();
       boxController.close?.call();
     } catch (_) {}
   }
 
-  void setObjectStr([String? id, String? descr, String? flag]) {
-    try {
-      controller.text = descr ?? '';
-      //object = DefaultModel(idStr: id ?? '', descr: descr ?? '', flag: flag ?? '') as T;
-      boxController.refresh?.call();
-      boxController.close?.call();
-    } catch (_) {}
-  }
+  // void setObjectStr([String? id, String? descr, String? flag]) {
+  //   try {
+  //     controller.text = descr ?? '';
+  //     //object = DefaultModel(idStr: id ?? '', descr: descr ?? '', flag: flag ?? '') as T;
+  //     boxController.refresh?.call();
+  //     boxController.close?.call();
+  //   } catch (_) {}
+  // }
 
   // void setObjectByFlag(String flag, List<DefaultModel> objects) {
   //   try {
@@ -228,33 +220,17 @@ class TextController<T> {
     String? mask,
     this.type = TextControllerType.text,
     this.object,
-    int? id,
+    String? path,
   }) {
     controller = TextEditingController(text: text.toString());
-    // if (text == null) {
-    //   text = '';
-    //   if (type == TextControllerType.number) {
-    //     // text = 0;
-    //   } else if (type == TextControllerType.double) {
-    //     // text = 0;
-    //   } else if (type == TextControllerType.currency) {
-    //     CurrencyService.update();
-    //     if (CurrencyService.current.name != 'Euro') {
-    //       text = '${CurrencyService.current.symbol} 0,00';
-    //     } else {
-    //       text = '0,00 ${CurrencyService.current.symbol}';
-    //     }
-    //   }
-    // }
-    // controller = mask != null
-    //     ? MaskedTextController(mask: mask, text: text.toString())
-    //     : TextEditingController(text: text.toString());
-    // if (id != null && T is DefaultModel) {
-    //   object = DefaultModel(id: id, descr: text.toString()) as T;
-    // }
+    text ??= '';
+    controller = TextEditingController(text: text.toString());
+    if (path != null && T is ConsoleModel) {
+      object = ConsoleModel(path, text.toString()) as T;
+    }
   }
 
-  // DefaultModelTextController<T> get defaultModel => DefaultModelTextController<T>(object);
+  ConsoleModelTextController<T> get defaultModel => ConsoleModelTextController<T>(object);
 
   void close() {
     boxController.close?.call();
@@ -263,24 +239,18 @@ class TextController<T> {
   map(Suggestion Function(dynamic e) param0) {}
 }
 
-// class DefaultModelTextController<T> {
-//   T? object;
-//   DefaultModelTextController(this.object);
-//   int get id {
-//     if (object == null) return 0;
-//     if (object is! DefaultModel) return 0;
-//     return (object as DefaultModel).id;
-//   }
+class ConsoleModelTextController<T> {
+  T? object;
+  ConsoleModelTextController(this.object);
+  String get path {
+    if (object == null) return '';
+    if (object is! ConsoleModel) return '';
+    return (object as ConsoleModel).path;
+  }
 
-//   String get descr {
-//     if (object == null) return '';
-//     if (object is! DefaultModel) return '';
-//     return (object as DefaultModel).descr;
-//   }
-
-//   String get flag {
-//     if (object == null) return '';
-//     if (object is! DefaultModel) return '';
-//     return (object as DefaultModel).flag;
-//   }
-// }
+  String get name {
+    if (object == null) return '';
+    if (object is! ConsoleModel) return '';
+    return (object as ConsoleModel).name;
+  }
+}

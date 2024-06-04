@@ -1,7 +1,7 @@
-import 'package:retroDownloader/app/core/components/utils/h.dart';
-import 'package:retroDownloader/app/core/components/utils/w.dart';
-import 'package:retroDownloader/app/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:retroDownloader/app/core/theme/app_theme.dart';
+import 'package:retroDownloader/app/shared/components/utils/h.dart';
+import 'package:retroDownloader/app/shared/components/utils/w.dart';
 
 class AppTextBox extends StatelessWidget {
   final double columnLength;

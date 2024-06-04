@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:retroDownloader/app/core/components/app_shimmer.dart';
-import 'package:retroDownloader/app/core/components/form/app_button/app_button_style.dart';
+import 'package:retroDownloader/app/shared/components/app_shimmer.dart';
+import 'package:retroDownloader/app/shared/components/form/app_button/app_button_style.dart';
 
 class AppButton extends StatefulWidget {
   final String label;
@@ -46,10 +46,6 @@ class _AppButtonState extends State<AppButton> {
 
   void fecthIsEnableFunc() async {
     setState(() => isEnableFunc = null);
-    // final response =
-    //     await SegurancaProvider.getPermissaoFuncao('${widget.idFuncao}');
-    // if (response.hasError) return;
-    // setState(() => isEnableFunc = response.data);
   }
 
   @override
@@ -63,7 +59,7 @@ class _AppButtonState extends State<AppButton> {
 
   Widget _button(BuildContext context) {
     return Container(
-      margin: widget.margin ?? const EdgeInsets.only(top: 26),
+      margin: widget.margin ?? const EdgeInsets.only(top: 0),
       child: AppShimmer(
         enable: isEnableFunc == null || widget.loading || isLoading,
         child: IgnorePointer(
@@ -103,7 +99,7 @@ class _AppButtonState extends State<AppButton> {
                           await widget.onPressed!.call();
                         } catch (e, stacktrace) {
                           log(e.toString());
-                          print(stacktrace.toString());
+                          log(stacktrace.toString());
                         }
                         setState(() => isLoading = false);
                       } else {

@@ -1,21 +1,39 @@
 import 'package:rxdart/rxdart.dart';
 
 class AppStream<T> {
-  late final T t;
+  late final T? t;
   AppStream() {
-    controller = BehaviorSubject<T>();
+    controller = BehaviorSubject<T?>();
   }
 
   AppStream.seeded(this.t) {
-    controller = BehaviorSubject<T>.seeded(t);
+    controller = BehaviorSubject<T?>.seeded(t);
   }
 
-  late final BehaviorSubject<T> controller;
-  void add(e) => controller.sink.add(e);
-  Stream<T> get listen => controller.stream;
-  T get value => controller.stream.value;
+  late final BehaviorSubject<T?> controller;
+  void add(T e) => controller.sink.add(e);
+  Stream<T?> get listen => controller.stream;
+  T? get value => controller.stream.value;
   void update() => controller.sink.add(controller.value);
   bool get hasValue => controller.hasValue;
+
+  T? lastAdded;
+
+  void setLoading() {
+    if (controller.hasValue) {
+      lastAdded = controller.value;
+    }
+    controller.sink.add(null);
+  }
+
+  void setDefault() {
+    if (lastAdded != null) {
+      controller.sink.add(lastAdded as T);
+    } else {
+      controller.sink.close();
+      controller = BehaviorSubject<T?>();
+    }
+  }
 }
 
 class AppStreamNull<T> {

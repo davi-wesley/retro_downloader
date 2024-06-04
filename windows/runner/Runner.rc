@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "retroDownloader" "\0"
+            VALUE "FileDescription", "retro_downloader" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "retroDownloader" "\0"
+            VALUE "InternalName", "retro_downloader" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "retroDownloader.exe" "\0"
-            VALUE "ProductName", "retroDownloader" "\0"
+            VALUE "OriginalFilename", "retro_downloader.exe" "\0"
+            VALUE "ProductName", "retro_downloader" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

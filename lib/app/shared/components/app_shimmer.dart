@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:retroDownloader/app/core/components/app_text_box.dart';
 import 'package:retroDownloader/app/core/theme/app_theme.dart';
+import 'package:retroDownloader/app/shared/components/app_text_box.dart';
 import 'package:shimmer/shimmer.dart';
 
 class AppShimmer extends StatelessWidget {
@@ -49,17 +49,20 @@ class AppShimmerBox extends StatelessWidget {
 
 class AppShimmerField extends StatelessWidget {
   final double columnLength;
+  final bool withoutLabel;
 
-  const AppShimmerField({super.key, this.columnLength = 1});
+  const AppShimmerField({super.key, this.columnLength = 1, this.withoutLabel = false});
 
   @override
   Widget build(BuildContext context) {
-    return AppShimmer(
-      child: AppTextBox(
-        label: 'Carregando...',
-        columnLength: columnLength,
-      ),
-    );
+    return withoutLabel
+        ? Container()
+        : AppShimmer(
+            child: AppTextBox(
+              label: 'Carregando...',
+              columnLength: columnLength,
+            ),
+          );
   }
 }
 

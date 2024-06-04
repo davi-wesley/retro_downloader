@@ -1,4 +1,5 @@
 import json
+import os
 from typing import List
 
 from playwright.sync_api import sync_playwright
@@ -40,10 +41,13 @@ def get_consoles() -> List[Console]:
                 print(f'NOME CONSOLE: {console_name}')
                 consoles.append({'path':path, 'name':console_name})
 
-
         consoles_list_path = f'python\\consoles.json'
-
-        print(consoles)
+        
+        if os.path.isfile(consoles_list_path):
+            os.remove(consoles_list_path)
+            print("Arquivo removido com sucesso.")
+        else:
+            print("O arquivo não existe.")
 
         with open(consoles_list_path, 'w') as json_file:
             json_string = json.dumps(consoles)

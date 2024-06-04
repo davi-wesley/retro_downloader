@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:retroDownloader/app/core/theme/app_colors.dart';
-import 'package:retroDownloader/app/modules/initial_page/initial_page_form_page.dart';
+import 'package:retroDownloader/app/modules/initial_page/presentation/initial_page_form_page.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

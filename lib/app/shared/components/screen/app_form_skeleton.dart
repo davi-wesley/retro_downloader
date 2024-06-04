@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retroDownloader/app/core/components/utils/h.dart';
+import 'package:retroDownloader/app/shared/components/utils/h.dart';
 
 class AppFormSkeleton extends StatefulWidget {
   final List<Widget> children;
@@ -53,7 +53,6 @@ class _AppFormSkeletonState extends State<AppFormSkeleton> {
               width: double.infinity,
               child: Wrap(
                 direction: widget.formDirection,
-                // spacing: 8,
                 children: widget.children,
               ),
             ),
@@ -64,7 +63,6 @@ class _AppFormSkeletonState extends State<AppFormSkeleton> {
                 width: double.infinity,
                 child: Wrap(
                   direction: widget.formDirection,
-                  // spacing: 8,
                   children: widget.childrenBelowTabs!,
                 ),
               ),
